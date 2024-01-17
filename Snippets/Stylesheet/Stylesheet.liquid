@@ -1,0 +1,33 @@
+
+{%- liquid
+
+    #
+    #   Snippet - 𝗦𝘁𝘆𝗹𝗲𝘀𝗵𝗲𝗲𝘁
+    #
+    #   Link a stylsheet from your theme.
+    #
+
+    #
+    #   𝗣𝗮𝗿𝗮𝗺𝗲𝘁𝗲𝗿𝘀
+    #   - default ( Filename )
+    #   * print [ boolean ] = false
+    #
+
+    assign print = print | default : false
+    assign file = Stylesheet
+
+    ############################################################################
+
+    assign attibutes = ''
+
+    if print
+        assign attributes = attributes | append : 'media = print ' 
+    endif
+
+-%}
+
+<link {{ attributes }}
+    href = '{{ Stylesheet | append : '.css' | asset_url }}'
+    type = text/css
+    rel = stylesheet
+>

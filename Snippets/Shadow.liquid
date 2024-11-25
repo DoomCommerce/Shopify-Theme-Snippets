@@ -1,0 +1,66 @@
+
+{%- liquid
+
+    #
+    #   Snippet : 𝗦𝗵𝗮𝗱𝗼𝘄
+    #
+
+    #
+    #   𝗣𝗮𝗿𝗮𝗺𝗲𝘁𝗲𝗿𝘀
+    #   - structure : String
+    #   * attributes : String
+    #   * stylesheet : String
+    #   * variables : String
+    #   * styles : String
+    #   * tag : String
+    #
+
+    ############################################################################
+
+    if structure == blank
+        break
+    endif
+
+    ############################################################################
+
+    if stylesheet
+        capture stylesheet
+            render 'Stylesheet' with stylesheet
+        endcapture
+    endif
+
+-%}
+
+{%- if tag -%}
+    <{{- tag }} {{ attributes -}}>
+{%- endif -%}
+
+    <template shadowrootmode = closed >
+
+        {{- stylesheet -}}
+
+        {%- if styles or variables -%}
+
+            <style>
+
+                {%- if variables -%}
+
+                    :host {
+                        {{- variables -}}
+                    }
+
+                {%- endif -%}
+
+                {{- styles -}}
+
+            </style>
+
+        {%- endif -%}
+
+        {{- structure -}}
+
+    </template>
+
+{%- if tag -%}
+    </{{- tag -}}>
+{%- endif -%}
